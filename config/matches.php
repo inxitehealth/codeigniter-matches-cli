@@ -14,7 +14,7 @@ $config['templates'] = 'views/matches_templates/';
 /**
  * Tell the Matches what controller to extend
  */
-$config['c_extends'] = 'CI';
+$config['c_extends'] = 'MY';
 
 /**
  * Tell the Matches what model to extend

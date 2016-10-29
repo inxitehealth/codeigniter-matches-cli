@@ -380,10 +380,12 @@ class Matches extends CI_Controller {
         if(isset($version) && ($this->migration->version($version) === FALSE))
         {
             show_error($this->migration->error_string());
+            error_log("Migration failed.");
         }
         elseif(is_null($version) && $this->migration->latest() === FALSE)
         {
             show_error($this->migration->error_string());
+            error_log("Migration failed 2.");
         }
         else
         {

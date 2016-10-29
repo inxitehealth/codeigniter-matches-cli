@@ -1,11 +1,35 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');?>
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>{{VIEW}} view page</title>
-	</head>
-	<body>
-		<h1>This is my first application</h1>
-		<?php echo $content; ?>
-	</body>
-</html>
+<div class="row">
+	<div class="col-sm-12">
+		<div class="portlet">
+			<div class="portlet-title">
+				<h1>
+					<?php if ($this->RbacModel->get("Access Control", "R")) : ?>
+                        <a href="<?=site_url('controller/' . $patient->id);?>">Module Name</a>
+                    <?php endif ;?>
+				</h1>
+			</div>
+			<?php if (($this->RbacModel->get("Access Control", "R"))) { ?>
+			<div class="portlet-body">
+				<div class="row">
+					<div class="col-sm-6">
+					</div>
+					<div class="col-sm-6">
+					</div>
+				</div>
+			</div>
+			<?php } ?>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" defer>
+	function defer(method) {
+	    if (window.jQuery)
+	        method();
+	    else
+	        setTimeout(function(){defer(method)}, 50);
+	}
+	defer(function(){
+		//insert JS here
+	});
+</script>

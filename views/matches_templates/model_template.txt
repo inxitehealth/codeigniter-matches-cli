@@ -1,4 +1,5 @@
 <?php  if(!defined('BASEPATH')) exit('No direct script access allowed');
+
 class {{MODEL}} extends {{MO_EXTENDS}}_Model
 {
 	public function __construct()
@@ -6,10 +7,54 @@ class {{MODEL}} extends {{MO_EXTENDS}}_Model
 		parent::__construct();
 	}
 	
-	public function get_all()
+	public function get()
 	{
-		return ('This is your first application');
+		if ($q = $this->db->get('table')) {
+			return $q->result();
+		} else {
+			throw new Exception('Could not get data from table:'.print_r($this->db->error(), true), 1);
+		}
+	}
+
+	public function set($data)
+	{
+		$this->db->trans_begin();
+		if ($this->db->insert('table', $data)) {
+			$insertId = $this->db->insert_id();
+			$this->db->trans_commit();
+			return $insertId;
+		} else {
+			$error = $this->db->error();
+			$this->db->trans_rollback();
+			throw new Exception('Could not insert data:'.print_r($error, true), 1);
+		}
+	}
+
+	public function update($dataId, $data)
+	{
+		$this->db->trans_begin();
+		$this->db->where('id', $dataId)
+		if ($this->db->update('table', $data)) {
+			$this->db->trans_commit();
+			return true;
+		} else {
+			$error = $this->db->error();
+			$this->db->trans_rollback();
+			throw new Exception('Could not update data:'.print_r($error, true), 1);
+		}
+	}
+
+	public function delete($id)
+	{
+		$this->db->trans_begin();
+		$this->db->where('id', $id)
+		if ($this->db->delete('table', $data)) {
+			$this->db->trans_commit();
+			return true;
+		} else {
+			$error = $this->db->error();
+			$this->db->trans_rollback();
+			throw new Exception('Could not delete data from table:'.print_r($error, true), 1);
+		}
 	}
 }
-/* End of file '{{MODEL_FILE}}' */
-/* Location: ./application/models/{{MODEL_FILE}} */
