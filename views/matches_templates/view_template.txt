@@ -3,21 +3,21 @@
 		<div class="portlet">
 			<div class="portlet-title">
 				<h1>
-					<?php if ($this->RbacModel->get("Access Control", "R")) : ?>
-                        <a href="<?=site_url('controller/' . $patient->id);?>">Module Name</a>
-                    <?php endif ;?>
+					<?php if ($this->RbacModel->get('Access Control', 'R')) : ?>
+                        <a href="<?= site_url('controller/' . $patient->id); ?>">Module Name</a>
+                    <?php endif; ?>
 				</h1>
 			</div>
-			<?php if (($this->RbacModel->get("Access Control", "R"))) { ?>
-			<div class="portlet-body">
-				<div class="row">
-					<div class="col-sm-6">
-					</div>
-					<div class="col-sm-6">
-					</div>
-				</div>
-			</div>
-			<?php } ?>
+			<?php if ($this->RbacModel->get('Access Control', 'R')) : ?>
+                <div class="portlet-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                        </div>
+                        <div class="col-sm-6">
+                        </div>
+                    </div>
+                </div>
+			<?php endif; ?>
 		</div>
 	</div>
 </div>

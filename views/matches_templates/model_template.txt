@@ -1,4 +1,4 @@
-<?php  if(!defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) exit('File not found.');
 
 class {{MODEL}} extends {{MO_EXTENDS}}_Model
 {
@@ -6,55 +6,51 @@ class {{MODEL}} extends {{MO_EXTENDS}}_Model
 	{
 		parent::__construct();
 	}
-	
-	public function get()
+
+	public function get() : array
 	{
-		if ($q = $this->db->get('table')) {
-			return $q->result();
-		} else {
-			throw new Exception('Could not get data from table:'.print_r($this->db->error(), true), 1);
+		if (!($q = $this->db->get('table'))) {
+			throw new Exception('Could not get data from table: ' . print_r($this->db->error(), true));
 		}
+        return $q->result();
 	}
 
-	public function set($data)
-	{
-		$this->db->trans_begin();
-		if ($this->db->insert('table', $data)) {
-			$insertId = $this->db->insert_id();
-			$this->db->trans_commit();
-			return $insertId;
-		} else {
-			$error = $this->db->error();
-			$this->db->trans_rollback();
-			throw new Exception('Could not insert data:'.print_r($error, true), 1);
-		}
-	}
-
-	public function update($dataId, $data)
+	public function set($data) : int
 	{
 		$this->db->trans_begin();
-		$this->db->where('id', $dataId)
-		if ($this->db->update('table', $data)) {
-			$this->db->trans_commit();
-			return true;
-		} else {
+		if (!$this->db->insert('table', $data)) {
 			$error = $this->db->error();
 			$this->db->trans_rollback();
-			throw new Exception('Could not update data:'.print_r($error, true), 1);
+			throw new Exception('Could not insert data: ' . print_r($error, true));
 		}
-	}
+        $insertId = $this->db->insert_id();
+        $this->db->trans_commit();
+        return $insertId;
+    }
 
-	public function delete($id)
+	public function update($id, $data) : bool
 	{
 		$this->db->trans_begin();
 		$this->db->where('id', $id)
-		if ($this->db->delete('table', $data)) {
-			$this->db->trans_commit();
-			return true;
-		} else {
+		if (!$this->db->update('table', $data)) {
 			$error = $this->db->error();
 			$this->db->trans_rollback();
-			throw new Exception('Could not delete data from table:'.print_r($error, true), 1);
+			throw new Exception('Could not update data: ' . print_r($error, true));
 		}
+        $this->db->trans_commit();
+		return true;
+	}
+
+	public function delete($id) : bool
+	{
+		$this->db->trans_begin();
+		$this->db->where('id', $id)
+		if (!$this->db->delete('table')) {
+			$error = $this->db->error();
+			$this->db->trans_rollback();
+			throw new Exception('Could not delete data from table: ' . print_r($error, true));
+		}
+        $this->db->trans_commit();
+		return true;
 	}
 }

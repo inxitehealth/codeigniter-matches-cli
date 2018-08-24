@@ -1,14 +1,14 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) exit('File not found.');
 
 class {{CONTROLLER}} extends MY_Controller
 {
 
-	function _remap($method, $params=array())
+	function _remap($method, $params = [])
     {
         $methodToCall = method_exists($this, $method) ? $method : 'index';
         return call_user_func_array(array($this, $methodToCall), $params);
     }
-	
+
 	public function index()
 	{
 		//Index Page Here
