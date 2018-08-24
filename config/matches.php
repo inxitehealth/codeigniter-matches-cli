@@ -13,7 +13,7 @@
 |--------------------------------------------------------------------------
 |
  */
-$config['templates'] = 'views/matches_templates/';
+$config['templates'] = 'views' . DIRECTORY_SEPARATOR . 'matches_templates' . DIRECTORY_SEPARATOR;
 
  /*
 |--------------------------------------------------------------------------
