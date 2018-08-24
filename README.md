@@ -100,11 +100,11 @@ php index.php matches create:view users.index_view
 
 ## Migrations
 
-CodeIgniter Matches helps you create, do, undo, and reset migrations.
+CodeIgniter Matches helps you create, do, undo, redo, and reset migrations.
 
 ### `create:migration`
 
-To create a migration you can call create:migration. As a result, a migration will be created in the migrations directory prefixed with version as file name. You can also pass a table name as parameter. If no table name is given, you will have to put the name of the table in the migration file. Below are usage examples:
+To create a migration you can call `create:migration`. As a result, a migration will be created in the migrations directory prefixed with version as file name. You can also pass a table name as parameter. If no table name is given, you will have to put the name of the table in the migration file. Below are usage examples:
 
 Usage examples
 
@@ -125,7 +125,7 @@ php index.php matches create:migration t:%inherit% create_users_table
 
 ### `do:migration`
 
-do:migration executes the migrations' up() methods. If you pass the version of the migration a parameter, it will stop at that version of the migration.
+`do:migration` executes the migrations' `up()` methods. If you pass the version of the migration a parameter, it will stop at that version of the migration.
 
 Usage examples:
 
@@ -139,7 +139,10 @@ php index.php matches do:migration 20150722
 
 ### `undo:migration`
 
-undo:migration returns you to the previous migration version. This one also can accept a migration version as parameter to return to a migration.
+`undo:migration` returns you to the previous migration version. This function also accepts either:
+
+- a migration version to rollback to a specific version
+- a negative number to rollback that many migration versions (starting from the current version)
 
 Usage examples:
 
@@ -148,12 +151,24 @@ Usage examples:
 php index.php matches undo:migration
 
 // Undo the migrations until a specified migration version
-php index.php matches undo:migration 20150722
+php index.php matches undo:migration 20150722100233
+
+// Undo the last three migrations
+php index.php matches undo:migration -3
+```
+
+### `redo:migration`
+
+`redo:migration` will run the current migration's `down()` and `up()` functions.
+
+```php
+// re-run the current migration
+php index.php matches redo:migration
 ```
 
 ### `reset:migration`
 
-reset:migration will reset the migrations until the migration mentioned in $config['migration_version'] (in the migration configuration file).
+`reset:migration` will reset the migrations until the migration mentioned in `$config['migration_version']` (in the migration configuration file).
 
 Usage example:
 
