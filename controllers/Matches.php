@@ -341,6 +341,17 @@ class Matches extends CI_Controller
     }
 
     /**
+     * Used to get the current migration version
+     *
+     * @return string Current migration version
+     */
+    public function get_migration()
+    {
+        echo 'Your current migration version is ' . $this->_get_version() . $this->_ret2;
+        return true;
+    }
+
+    /**
      * Used to execute all new migrations if no version is specified
      *
      * @param int|null $version The migration version number to run

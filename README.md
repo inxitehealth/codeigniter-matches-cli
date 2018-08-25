@@ -100,7 +100,15 @@ php index.php matches create:view users.index_view
 
 ## Migrations
 
-CodeIgniter Matches helps you create, do, undo, redo, and reset migrations.
+CodeIgniter Matches helps you get the current version of, create, do, undo, redo, and reset migrations.
+
+### `get:migration`
+
+Returns the current migration version.
+
+```php
+php index.php matches get:migration
+```
 
 ### `create:migration`
 
