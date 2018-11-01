@@ -30,7 +30,7 @@ Put `Matches.php` (or `matches.php` if you have a lesser than v.3 CodeIgniter) i
 From terminal or command prompt go to the application's index.php and type:
 
 ```php
-php index.php matches
+php public/index.php matches
 ```
 
 If everything went well, you should be greeted by Matches.
@@ -45,7 +45,7 @@ Usage example
 
 ```php
 // Create an MVC stack
-php index.php matches create:app users
+php public/index.php matches create:app users
 ```
 
 ## Controllers
@@ -60,10 +60,10 @@ Usage examples
 
 ```php
 // Create a Welcome controller that extends MY_Controller
-php index.php matches create:controller welcome e:my
+php public/index.php matches create:controller welcome e:my
 
 // Create a User controller inside admin directory that will extend Admin_Controller
-php index.php matches create:controller admin.user extend:admin
+php public/index.php matches create:controller admin.user extend:admin
 ```
 
 ## Models
@@ -76,10 +76,10 @@ Usage examples
 
 ```php
 // Create a user_model model that extends MY_Model
-php index.php matches create:model user_model e:my
+php public/index.php matches create:model user_model e:my
 
 // Create a User model inside admin directory that will extend MY_Model
-php index.php matches create:model admin.user extend:my
+php public/index.php matches create:model admin.user extend:my
 ```
 
 ## Views
@@ -92,10 +92,10 @@ Usage examples
 
 ```php
 // Create an index_view.php
-php index.php matches create:view user_view
+php public/index.php matches create:view user_view
 
 // Create an index_view.php inside users directory
-php index.php matches create:view users.index_view
+php public/index.php matches create:view users.index_view
 ```
 
 ## Migrations
@@ -107,7 +107,7 @@ CodeIgniter Matches helps you get the current version of, create, do, undo, redo
 Returns the current migration version.
 
 ```php
-php index.php matches get:migration
+php public/index.php matches get:migration
 ```
 
 ### `create:migration`
@@ -118,17 +118,17 @@ Usage examples
 
 ```php
 // Create a migration
-php index.php matches create:migration create_users_table
+php public/index.php matches create:migration create_users_table
 
 // Create a migration with a table inside it
-php index.php matches create:migration create_users_table table:users
+php public/index.php matches create:migration create_users_table table:users
 
 // Create a migration with a table inside it
-php index.php matches create:migration create_users_table t:users
+php public/index.php matches create:migration create_users_table t:users
 
 // Create a migration and name the table like the migration
 // -> The table name will be 'users' in this example
-php index.php matches create:migration t:%inherit% create_users_table
+php public/index.php matches create:migration t:%inherit% create_users_table
 ```
 
 ### `do:migration`
@@ -139,10 +139,10 @@ Usage examples:
 
 ```php
 // Execute all migrations until the last one
-php index.php matches do:migration
+php public/index.php matches do:migration
 
 // Execute all migrations until a certain version of migration
-php index.php matches do:migration 20150722
+php public/index.php matches do:migration 20150722
 ```
 
 ### `undo:migration`
@@ -156,13 +156,13 @@ Usage examples:
 
 ```php
 // Undo last migration
-php index.php matches undo:migration
+php public/index.php matches undo:migration
 
 // Undo the migrations until a specified migration version
-php index.php matches undo:migration 20150722100233
+php public/index.php matches undo:migration 20150722100233
 
 // Undo the last three migrations
-php index.php matches undo:migration -3
+php public/index.php matches undo:migration -3
 ```
 
 ### `redo:migration`
@@ -171,7 +171,7 @@ php index.php matches undo:migration -3
 
 ```php
 // re-run the current migration
-php index.php matches redo:migration
+php public/index.php matches redo:migration
 ```
 
 ### `reset:migration`
@@ -182,7 +182,7 @@ Usage example:
 
 ```php
 // Reset the migrations
-php index.php matches reset:migration
+php public/index.php matches reset:migration
 ```
 
 ## encryption_key
